@@ -1,0 +1,790 @@
+Category    : 'Root'
+    Category    : 'AcquisitionControl'
+        Enumeration : 'AcquisitionMode'
+Sets the acquisition mode of the device. Continuous: acquires images continuously. Multi Frame: acquires a specified number of images before stopping acquisition. Single Frame: acquires 1 image before stopping acquisition.
+        Command     : 'AcquisitionStart'
+This command starts the acquisition of images.
+        Command     : 'AcquisitionStop'
+This command stops the acquisition of images.
+        Integer     : 'AcquisitionFrameCount'
+Number of images to acquire during a multi frame acquisition.
+        Integer     : 'AcquisitionBurstFrameCount'
+This feature is used only if the FrameBurstStart trigger is enabled and the FrameBurstEnd trigger is disabled. Note that the total number of frames captured is also conditioned by AcquisitionFrameCount if AcquisitionMode is MultiFrame and ignored if AcquisitionMode is Single.
+        Enumeration : 'ExposureMode'
+Sets the operation mode of the Exposure.
+        Float       : 'ExposureTime'
+Exposure time in microseconds when Exposure Mode is Timed.
+        Enumeration : 'ExposureAuto'
+Sets the automatic exposure mode
+        Float       : 'AcquisitionFrameRate'
+User controlled acquisition frame rate in Hertz
+        Float       : 'AcquisitionResultingFrameRate'
+Resulting frame rate in Hertz. If this does not equal the Acquisition Frame Rate it is because the Exposure Time is greater than the frame time.
+        Boolean     : 'AcquisitionFrameRateEnable'
+If enabled, AcquisitionFrameRate can be used to manually control the frame rate.
+        Float       : 'AcquisitionLineRate'
+Controls the rate (in Hertz) at which the Lines in a Frame are captured.
+        Enumeration : 'TriggerSelector'
+              * TriggerMode
+              * TriggerSoftware
+              * TriggerSource
+              * TriggerActivation
+              * TriggerOverlap
+              * TriggerDelay
+Selects the type of trigger to configure.
+        Enumeration : 'TriggerMode'
+Controls whether or not trigger is active.
+        Command     : 'TriggerSoftware'
+Generates an internal trigger if Trigger Source is set to Software.
+        Enumeration : 'TriggerSource'
+Specifies the internal signal or physical input line to use as the trigger source.
+Specifies the activation mode of the trigger.
+        Enumeration : 'TriggerOverlap'
+Specifies the overlap mode of the trigger.
+        Float       : 'TriggerDelay'
+Specifies the delay in microseconds (µs) to apply after the trigger reception before activating it.
+        Enumeration : 'SensorShutterMode'
+Sets the shutter mode of the device.
+    Category    : 'AnalogControl'
+        Enumeration : 'GainSelector'
+              * GainRaw
+              * Gain
+Selects which gain to control. The All selection is a total amplification across all channels (or taps).
+        Float       : 'Gain'
+Controls the amplification of the video signal in dB.
+        Enumeration : 'GainAuto'
+Sets the automatic gain mode. Set to Off for manual control. Set to Once for a single automatic adjustment then return to Off. Set to Continuous for constant adjustment. In automatic modes, the camera adjusts the gain to maximize the dynamic range.
+        Enumeration : 'GainConversion'
+Selects which gain conversion mode to use.
+        Enumeration : 'BlackLevelSelector'
+              * BlackLevelRaw
+              * BlackLevel
+Selects which black level to control.  Only All can be set by the user. Analog and Digital are read-only.
+        Float       : 'BlackLevel'
+Controls the offset of the video signal in percent.
+        Boolean     : 'BlackLevelClampingEnable'
+Enable the black level auto clamping feature which performs dark current compensation. This feature is not supported by rolling shutter sensors.
+        Enumeration : 'BalanceRatioSelector'
+              * BalanceRatio
+Selects a balance ratio to configure once a balance ratio control has been selected.
+Controls the balance ratio of the selected color relative to green. Used for white balancing.
+White Balance compensates for color shifts caused by different lighting conditions. It can be automatically or manually controlled. For manual control, set to Off. For automatic control, set to Once or Continuous.
+        Float       : 'Gamma'
+Controls the gamma correction of pixel intensity.
+        Boolean     : 'GammaEnable'
+Enables/disables gamma correction.
+        Boolean     : 'SharpeningEnable'
+Enables/disables the sharpening feature. Sharpening is disabled by default.
+Enables/disables the auto sharpening feature. When enabled, the camera automatically determines the sharpening threshold based on the noise level of the camera.
+Controls the amount to sharpen a signal. The sharpened amount is proportional to the difference between a pixel and its neighbors. A negative value smooths out the difference, while a positive value amplifies the difference. You can boost by a maximum of 8x, but smoothing is limited to 1x  (in float). Default value: 2.0
+Controls the minimum intensity gradient change to invoke sharpening. When "Sharpening Auto" is enabled, this is determined automatically by the device. The threshold is specified as a fraction of the total intensity range, and ranges from 0 to 0.25. A threshold higher than 25% produces little to no difference than 25%. High thresholds sharpen only areas with significant intensity changes. Low thresholds sharpen more areas.
+    Category    : 'ImageFormatControl'
+        Integer     : 'SensorWidth'
+Effective width of the sensor in pixels.
+        Integer     : 'SensorHeight'
+Effective height of the sensor in pixels.
+        Integer     : 'WidthMax'
+Maximum width of the image (in pixels). The dimension is calculated after horizontal binning. WidthMax does not take into account the current Region of interest (Width or OffsetX).
+        Integer     : 'HeightMax'
+Maximum height of the image (in pixels). This dimension is calculated after vertical binning. HeightMax does not take into account the current Region of interest (Height or OffsetY).
+        Integer     : 'Width'
+Width of the image provided by the device (in pixels).
+        Integer     : 'Height'
+Height of the image provided by the device (in pixels).
+        Integer     : 'OffsetX'
+Horizontal offset from the origin to the ROI (in pixels).
+        Integer     : 'OffsetY'
+Vertical offset from the origin to the ROI (in pixels).
+        Enumeration : 'PixelFormat'
+Format of the pixel provided by the camera.
+        Enumeration : 'PixelSize'
+Total size in bits of a pixel of the image.
+        Enumeration : 'PixelColorFilter'
+Type of color filter that is applied to the image. Only applies to Bayer pixel formats. All others have no color filter.
+        Integer     : 'PixelDynamicRangeMin'
+Minimum value that can be returned during the digitization process. This corresponds to the darkest value of the camera. For color cameras, this returns the smallest value that each color component can take.
+        Integer     : 'PixelDynamicRangeMax'
+Maximum value that can be returned during the digitization process. This corresponds to the brightest value of the camera. For color cameras, this returns the biggest value that each color component can take.
+        Boolean     : 'IspEnable'
+Controls whether the image processing core is used for optional pixel format mode (i.e. mono).
+        Enumeration : 'BinningSelector'
+              * BinningHorizontalMode
+              * BinningVerticalMode
+              * BinningHorizontal
+              * BinningVertical
+Selects which binning engine is controlled by the BinningHorizontal and BinningVertical features.
+        Enumeration : 'BinningHorizontalMode'
+        Enumeration : 'BinningVerticalMode'
+        Integer     : 'BinningHorizontal'
+Number of horizontal photo-sensitive cells to combine together. This reduces the horizontal resolution (width) of the image. A value of 1 indicates that no horizontal binning is performed by the camera. This value must be 1 for decimation to be active.
+        Integer     : 'BinningVertical'
+Number of vertical photo-sensitive cells to combine together. This reduces the vertical resolution (height) of the image. A value of 1 indicates that no vertical binning is performed by the camera. This value must be 1 for decimation to be active.
+        Enumeration : 'DecimationSelector'
+              * DecimationHorizontalMode
+              * DecimationVerticalMode
+              * DecimationHorizontal
+              * DecimationVertical
+Selects which decimation layer is controlled by the DecimationHorizontal and DecimationVertical features.
+        Enumeration : 'DecimationHorizontalMode'
+The mode used to reduce the horizontal resolution when DecimationHorizontal is used. The current implementation only supports a single decimation mode: Discard.  Average should be achieved via Binning.
+        Enumeration : 'DecimationVerticalMode'
+The mode used to reduce the vertical resolution when DecimationVertical is used. The current implementation only supports a single decimation mode: Discard.  Average should be achieved via Binning.
+        Integer     : 'DecimationHorizontal'
+Horizontal decimation of the image.  This reduces the horizontal resolution (width) of the image by only retaining a single pixel within a window whose size is the decimation factor specified here. A value of 1 indicates that no horizontal decimation is performed by the camera. This value must be 1 for binning to be active.
+        Integer     : 'DecimationVertical'
+Vertical decimation of the image.  This reduces the vertical resolution (height) of the image by only retaining a single pixel within a window whose size is the decimation factor specified here. A value of 1 indicates that no vertical decimation is performed by the camera. This value must be 1 for binning to be active.
+        Boolean     : 'ReverseX'
+Horizontally flips the image sent by the device. The region of interest is applied after flipping. For color cameras the bayer pixel format is affected. For example, BayerRG16 changes to BayerGR16.
+        Boolean     : 'ReverseY'
+Vertically flips the image sent by the device. The region of interest is applied after flipping. For color cameras the bayer pixel format is affected. For example, BayerRG16 changes to BayerGB16.
+        Enumeration : 'TestPatternGeneratorSelector'
+              * TestPattern
+Selects which test pattern generator is controlled by the TestPattern feature.
+        Enumeration : 'TestPattern'
+Selects the type of test pattern that is generated by the device as image source.
+        Enumeration : 'ImageCompressionMode'
+        Enumeration : 'AdcBitDepth'
+Selects which ADC bit depth to use. A higher ADC bit depth results in better image quality but slower maximum frame rate.
+Controls whether lossless compression adapts to the image content.  If disabled, a fixed encoding table is used.
+Reports the ratio between the uncompressed image size and compressed image size.
+        Integer     : 'MaxDatarateThreshold'
+        Integer     : 'CurrentDatarate'
+Reports the value of the current datarate tracker.
+Reports the count of dropped compressed frames.
+    Category    : 'DeviceControl'
+        Enumeration : 'DeviceTemperatureSelector'
+              * DeviceTemperature
+Selects the location within the device, where the temperature will be measured.
+        Enumeration : 'DeviceScanType'
+Scan type of the sensor of the device.
+        Enumeration : 'DeviceSensorChroma'
+Indicates whether the camera is polarized mono, mono or color.
+        StringReg   : 'DeviceVendorName'
+Name of the manufacturer of the device.
+        StringReg   : 'DeviceModelName'
+Model of the device.
+        StringReg   : 'SensorDescription'
+Returns Sensor Description
+        StringReg   : 'DeviceManufacturerInfo'
+Manufacturer information about the device.
+        StringReg   : 'DeviceVersion'
+Version of the device.
+        StringReg   : 'DeviceFirmwareVersion'
+Version of the firmware on the device.
+        StringReg   : 'DeviceSerialNumber'
+Device's serial number. This string is a unique identifier of the device.
+        StringReg   : 'DeviceID'
+Device identifier (serial number).
+        StringReg   : 'DeviceUserID'
+User-programmable device identifier.
+        Enumeration : 'DeviceTLType'
+Transport Layer type of the device.
+        Integer     : 'DeviceTLVersionMajor'
+Major version of the Transport Layer of the device.
+        Integer     : 'DeviceTLVersionMinor'
+Minor version of the Transport Layer of the device.
+        Integer     : 'DeviceMaxThroughput'
+Maximum bandwidth of the data that can be streamed out of the device. This can be used to estimate if the physical connection(s) can sustain transfer of free-running images from the camera at its maximum speed.
+        Integer     : 'DeviceLinkSpeed'
+Indicates the speed of transmission negotiated on the specified Link. (Bps)
+        Integer     : 'DeviceLinkThroughputLimit'
+Limits the maximum bandwidth of the data that will be streamed out by the device on the selected Link. If necessary, delays will be uniformly inserted between transport layer packets in order to control the peak bandwidth.
+        Float       : 'DeviceLinkBandwidthReserve'
+Percentage of streamed data bandwidth reserved for packet resend.
+        Integer     : 'DeviceLinkCurrentThroughput'
+Current bandwidth of streamed data.
+        Integer     : 'ControlPacketsReservedBandwidth'
+Reserved device link bandwidth for control data.
+        Integer     : 'DeviceStreamChannelCount'
+Indicates the number of streaming channels supported by the device.
+        Integer     : 'DeviceEventChannelCount'
+Indicates the number of event channels supported by the device.
+        Enumeration : 'DeviceCharacterSet'
+Character set used by the strings of the device`s bootstrap registers.
+        Command     : 'DeviceReset'
+This is a command that immediately resets and reboots the device.
+        Enumeration : 'DeviceIndicatorMode'
+Controls the LED behaviour: Inactive (off), Active (current status), or Error Status (off unless an error occurs).
+        Enumeration : 'DeviceRegistersEndianness'
+Endianess of the registers of the device.
+        Float       : 'DeviceTemperature'
+Device temperature in degrees Celsius (C).
+        Command     : 'TimestampReset'
+Resets the current value of the device timestamp counter.
+        Command     : 'TimestampLatch'
+Latches the current timestamp counter into TimestampLatchValue.
+        Integer     : 'TimestampLatchValue'
+Returns the latched value of the timestamp counter.
+        Enumeration : 'DevicePowerSupplySelector'
+              * PowerSupplyVoltage
+              * PowerSupplyCurrent
+Selects the power supply source to control or read.
+        Float       : 'PowerSupplyVoltage'
+Indicates the current voltage of the selected power supply (V).
+        Float       : 'PowerSupplyCurrent'
+Indicates the output current of the selected power supply (A).
+        Integer     : 'DeviceUptime'
+Total time since the device was powered up in seconds.
+        Integer     : 'LinkUptime'
+Time since the last phy negotiation (enumeration).
+        Integer     : 'EnumerationCount'
+Number of enumerations since uptime.
+        Command     : 'FactoryReset'
+Returns all user tables to factory default
+        Integer     : 'MaxDeviceResetTime'
+Time to wait until device reset complete (ms).
+    Category    : 'TransportLayerControl'
+        Integer     : 'PayloadSize'
+Provides the number of bytes transferred for each image or chunk on the stream channel.
+        Integer     : 'TLParamsLocked'
+        Category    : 'GigEVision'
+            Enumeration : 'GevSupportedOptionSelector'
+                  * GevSupportedOption
+Selects the GEV option to interrogate for existing support.
+            Boolean     : 'GevSupportedOption'
+Returns if the selected GEV option is supported.
+            Integer     : 'GevInterfaceSelector'
+                  * GevMACAddress
+                  * GevCurrentIPConfigurationLLA
+                  * GevCurrentIPConfigurationDHCP
+                  * GevCurrentIPConfigurationPersistentIP
+                  * GevCurrentIPAddress
+                  * GevCurrentSubnetMask
+                  * GevCurrentDefaultGateway
+                  * GevPersistentIPAddress
+                  * GevPersistentSubnetMask
+                  * GevPersistentDefaultGateway
+Selects which logical link to control.
+            Integer     : 'GevMACAddress'
+MAC address of the logical link.
+            Boolean     : 'GevCurrentIPConfigurationLLA'
+Controls whether the Link Local Address IP configuration scheme is activated on the given logical link.
+            Boolean     : 'GevCurrentIPConfigurationDHCP'
+Controls whether the DHCP IP configuration scheme is activated on the given logical link.
+            Boolean     : 'GevCurrentIPConfigurationPersistentIP'
+Controls whether the PersistentIP configuration scheme is activated on the given logical link.
+            Integer     : 'GevCurrentIPAddress'
+Reports the IP address for the given logical link.
+            Integer     : 'GevCurrentSubnetMask'
+Reports the subnet mask of the given logical link.
+            Integer     : 'GevCurrentDefaultGateway'
+Reports the default gateway IP address to be used on the given logical link.
+            StringReg   : 'GevFirstURL'
+The first choice of URL for the XML device description file.
+            StringReg   : 'GevSecondURL'
+The second choice of URL to the XML device description file.
+            Integer     : 'GevNumberOfInterfaces'
+Indicates the number of physical network interfaces supported by this device.
+Controls the Persistent IP address for this logical link.
+Controls the Persistent subnet mask associated with the Persistent IP address on this logical link.
+Controls the persistent default gateway for this logical link.
+            Integer     : 'GevHeartbeatTimeout'
+Indicates the current heartbeat timeout in milliseconds.
+            Integer     : 'GevTimestampTickFrequency'
+Indicates the number of timestamp ticks in 1 second (frequency in Hz).
+            Boolean     : 'GevGVCPPendingAck'
+Enables the generation of PENDING_ACK.
+            Boolean     : 'GevGVCPHeartbeatDisable'
+Disables the GVCP heartbeat.
+            Integer     : 'GevGVCPPendingTimeout'
+Indicates the longest GVCP command execution time before the device returns a PENDING_ACK in milliseconds.
+            Boolean     : 'GevIEEE1588'
+Enables the IEEE 1588 Precision Time Protocol to control the timestamp register.
+            Enumeration : 'GevIEEE1588ClockAccuracy'
+Indicates the expected accuracy of the device clock when it is the grandmaster, or in the event it becomes the grandmaster.
+            Enumeration : 'GevIEEE1588Status'
+Provides the status of the IEEE 1588 clock.
+            Enumeration : 'GevIEEE1588Mode'
+Provides the mode of the IEEE 1588 clock.
+            Integer     : 'GevIEEE1588ClockId'
+IEEE 1588 Clock ID
+            Command     : 'GevIEEE1588DataSetLatch'
+Latches the current IEEE 1588 dataset
+            Enumeration : 'GevIEEE1588StatusLatched'
+IEEE 1588 Latch Status
+            Integer     : 'GevIEEE1588ParentClockIdLatched'
+IEEE 1588 Latch Parent ID
+            Integer     : 'GevIEEE1588OffsetFromMasterLatched'
+IEEE 1588 Latch Offset From Master in Nanoseconds
+            Enumeration : 'GevGVCPExtendedStatusCodesSelector'
+                  * GevGVCPExtendedStatusCodes
+            Boolean     : 'GevGVCPExtendedStatusCodes'
+            Enumeration : 'GevCCP'
+Controls the device access privilege of an application.
+            Integer     : 'GevMCPHostPort'
+The port to which the device must send messages
+            Integer     : 'GevMCDA'
+Controls the destination IP address of the message channel
+            Integer     : 'GevMCTT'
+Indicates the transmission timeout of the message channel.
+            Integer     : 'GevMCRC'
+Indicates the number of retries of the message channel.
+            Integer     : 'GevMCSP'
+Indicates the source port of the message channel.
+            Integer     : 'GevStreamChannelSelector'
+                  * GevSCPInterfaceIndex
+                  * GevSCPHostPort
+                  * GevSCPDirection
+                  * GevSCPSFireTestPacket
+                  * GevSCPSDoNotFragment
+                  * GevSCPSBigEndian
+                  * GevSCPSPacketSize
+                  * GevSCPD
+                  * GevSCDA
+                  * GevSCSP
+                  * GevSCCFGUnconditionalStreaming
+                  * GevSCCFGExtendedChunkData
+Selects the stream channel to control.
+            Boolean     : 'GevSCCFGExtendedChunkData'
+Enables cameras to use the extended chunk data payload type for this stream channel.
+            Integer     : 'GevSCPDirection'
+Transmit or Receive of the channel
+            Integer     : 'GevSCPInterfaceIndex'
+Index of the logical link to use.
+            Integer     : 'GevSCPHostPort'
+Controls the port of the selected channel to which a GVSP transmitter must send data stream or the port from which a GVSP receiver may receive data stream.
+            Boolean     : 'GevSCPSFireTestPacket'
+Sends a test packet.
+            Boolean     : 'GevSCPSDoNotFragment'
+The state of this feature is copied into the "do not fragment" bit of the IP header of each stream packet.
+            Boolean     : 'GevSCPSBigEndian'
+Endianess of multi-byte pixel data for this stream.
+            Integer     : 'GevSCPSPacketSize'
+Specifies the stream packet size (in bytes) to send on this channel.
+            Integer     : 'GevSCPD'
+Controls the delay (in GEV timestamp counter unit) to insert between each packet for this stream channel. This can be used as a crude flow-control mechanism if the application or the network infrastructure cannot keep up with the packets coming from the device.
+            Integer     : 'GevSCDA'
+Controls the destination IP address of the selected stream channel to which a GVSP transmitter must send data stream or the destination IP address from which a GVSP receiver may receive data stream.
+            Integer     : 'GevSCSP'
+Indicates the source port of the stream channel.
+        Integer     : 'LinkErrorCount'
+Counts the number of error on the link.
+        Integer     : 'PacketResendRequestCount'
+Counts the number of resend requests received from the host.
+    Category    : 'SequencerControl'
+        Enumeration : 'SequencerMode'
+Controls whether or not a sequencer is active.
+        Enumeration : 'SequencerConfigurationMode'
+Controls whether or not a sequencer is in configuration mode.
+        Enumeration : 'SequencerConfigurationValid'
+Display whether the current sequencer configuration is valid to run.
+        Command     : 'SequencerConfigurationReset'
+Resets the sequencer configuration by erasing all saved sequencer sets.
+        Enumeration : 'SequencerFeatureSelector'
+              * SequencerFeatureEnable
+Selects which sequencer features to control.
+        Boolean     : 'SequencerFeatureEnable'
+Enables the selected feature and makes it active in all sequencer sets.
+        Integer     : 'SequencerSetStart'
+Sets the first sequencer set to be used.
+Displays the currently active sequencer set.
+        Integer     : 'SequencerSetSelector'
+              * SequencerSetValid
+              * SequencerSetSave
+              * SequencerSetLoad
+              * SequencerPathSelector
+              * SequencerTriggerSource
+              * SequencerTriggerActivation
+              * SequencerSetNext
+Selects the sequencer set to which subsequent settings apply.
+        Enumeration : 'SequencerSetValid'
+Displays whether the currently selected sequencer set's register contents are valid to use.
+        Command     : 'SequencerSetSave'
+Saves the current device configuration to the currently selected sequencer set.
+        Command     : 'SequencerSetLoad'
+Loads currently selected sequencer to the current device configuration.
+        Integer     : 'SequencerPathSelector'
+              * SequencerTriggerSource
+              * SequencerTriggerActivation
+              * SequencerSetNext
+Selects branching path to be used for subsequent settings.
+        Enumeration : 'SequencerTriggerSource'
+Specifies the internal signal or physical input line to use as the sequencer trigger source.
+Specifies the activation mode of the sequencer trigger.
+Specifies the next sequencer set.
+    Category    : 'ColorTransformationControl'
+Selects which Color Transformation module is controlled by the various Color Transformation features
+Enables/disables the color transform selected with ColorTransformationSelector. For RGB to YUV this is read-only. Enabling/disabling RGB to YUV can only be done by changing pixel format.
+Selects the Gain factor or Offset of the Transformation matrix to access in the selected Color Transformation module
+Represents the value of the selected Gain factor or Offset inside the Transformation matrix in floating point precision.
+Used to select from a set of RGBtoRGB transform matricies calibrated for different light sources. Selecting a value also sets the white balance ratios (BalanceRatioRed and BalanceRatioBlue), but those can be overwritten through manual or auto white balance.
+Enables/disables Saturation adjustment.
+Controls the color saturation.
+    Category    : 'AutoAlgorithmControl'
+        Enumeration : 'AutoAlgorithmSelector'
+              * AasRoiEnable
+              * AasRoiOffsetX
+              * AasRoiOffsetY
+              * AasRoiWidth
+              * AasRoiHeight
+Selects which Auto Algorithm is controlled by the RoiEnable, OffsetX, OffsetY, Width, Height features.
+Controls whether a user-specified ROI is used for auto algorithm that is currently selected by the AutoAlgorithmSelector feature.
+Controls the x-offset of the ROI used by the auto algorithm that is currently selected by the AutoAlgorithmSelector feature.
+Controls the y-offset of the ROI used by the auto algorithm that is currently selected by the AutoAlgorithmSelector feature.
+Controls the width of the ROI used by the auto algorithm that is currently selected by the AutoAlgorithmSelector feature.
+Controls the width of the ROI used by the auto algorithm that is currently selected by the AutoAlgorithmSelector feature.
+Selects the profile used by BalanceWhiteAuto.
+Controls the minimum value Auto White Balance can set for the Red/Blue BalanceRatio.
+Controls the maximum value Auto White Balance can set the Red/Blue BalanceRatio.
+Controls how quickly 'BalanceWhiteAuto' adjusts the values for Red and Blue BalanceRatio in response to changing conditions.  Higher damping means the changes are more gradual.
+        Enumeration : 'AutoExposureTargetGreyValueAuto'
+This indicates whether the target image grey level is automatically set by the camera or manually set by the user. Note that the target grey level is in the linear domain before gamma correction is applied.
+This is the user-specified target grey level (image mean) to apply to the current image. Note that the target grey level is in the linear domain before gamma correction is applied.
+        Enumeration : 'AutoExposureLightingMode'
+Selects a lighting mode: Backlight, Frontlight or Normal (default). a. Backlight compensation: used when a strong light is coming from the back of the object. b. Frontlight compensation: used when a strong light is shining in the front of the object while the background is dark. c. Normal lighting: used when the object is not under backlight or frontlight conditions. When normal lighting is selected, metering modes are available.
+        Enumeration : 'AutoExposureMeteringMode'
+Selects a metering mode: average, spot, or partial metering. a. Average: Measures the light from the entire scene uniformly to determine the final exposure value. Every portion of the exposed area has the same contribution. b. Spot: Measures a small area (about 3%) in the center of the scene while the rest of the scene is ignored. This mode is used when the scene has a high contrast and the object of interest is relatively small. c. Partial: Measures the light from a larger area (about 11%) in the center of the scene. This mode is used when very dark or bright regions appear at the edge of the frame. Note: Metering mode is available only when Lighting Mode Selector is Normal.
+        Float       : 'AutoExposureExposureTimeLowerLimit'
+The smallest exposure time that auto exposure can set.
+        Float       : 'AutoExposureExposureTimeUpperLimit'
+The largest exposure time that auto exposure can set.
+        Float       : 'AutoExposureGainLowerLimit'
+The smallest gain that auto exposure can set.
+        Float       : 'AutoExposureGainUpperLimit'
+The largest gain that auto exposure can set.
+        Float       : 'AutoExposureGreyValueLowerLimit'
+The lowest value in percentage that the target mean may reach.
+        Float       : 'AutoExposureGreyValueUpperLimit'
+The highest value in percentage that the target mean may reach.
+        Float       : 'AutoExposureEVCompensation'
+The EV compensation value used in the exposure compensation. This allows you to adjust the resultant image intensity with one control. A positive value makes the image brighter. A negative value makes the image darker. Range from -3 to 3 with a step of 1/3. Default = 0.
+        Float       : 'AutoExposureControlLoopDamping'
+It controls how fast the exposure and gain get settled. If the value is too small, it may cause the system to be unstable. Range is from 0.0 to 1.0. Default = 0.2.
+Selects whether to adjust gain or exposure first. When gain priority is selected, the camera fixes the gain to 0 dB, and the exposure is adjusted according to the target grey level. If the maximum exposure is reached before the target grey level is hit, the gain starts to change to meet the target. This mode is used to have the minimum noise. When exposure priority is selected, the camera sets the exposure to a small value (default is 5 ms). The gain is adjusted according to the target grey level. If maximum gain is reached before the target grey level is hit, the exposure starts to change to meet the target. This mode is used to capture fast motion.
+    Category    : 'DefectivePixelCorrection'
+        Boolean     : 'DefectCorrectStaticEnable'
+Enables/Disables table-based defective pixel correction.
+        Enumeration : 'DefectCorrectionMode'
+Controls the method used for replacing defective pixels.
+        Integer     : 'DefectTablePixelCount'
+The number of defective pixel locations in the current table.
+Controls the offset of the element to access in the defective pixel location table.
+Returns the X coordinate of the defective pixel at DefectTableIndex within the defective pixel table. Changes made do not take effect in captured images until the command DefectTableApply is written.
+Returns the Y coordinate of the defective pixel at DefectTableIndex within the defective pixel table. Changes made do not take effect in captured images until the command DefectTableApply is written.
+        Command     : 'DefectTableApply'
+Applies the current defect table, so that any changes made affect images captured by the camera. This writes the table to volatile memory, so changes to the table are lost if the camera loses power. To save the table to non-volatile memory, use DefectTableSave.
+        Command     : 'DefectTableSave'
+Saves the current defective pixel table non-volatile memory, so that it is preserved when the camera boots up. This overwrites the existing defective pixel table. The new table is loaded whenever the camera powers up.
+        Command     : 'DefectTableFactoryRestore'
+Restores the Defective Pixel Table to its factory default state, which was calibrated during manufacturing. This permanently overwrites any changes made to the defect table.
+    Category    : 'UserSetControl'
+        Enumeration : 'UserSetSelector'
+              * UserSetLoad
+              * UserSetSave
+Selects the feature User Set to load, save or configure.
+        Command     : 'UserSetLoad'
+Loads the User Set specified by UserSetSelector to the device and makes it active.
+        Command     : 'UserSetSave'
+Saves the User Set specified by UserSetSelector to the non-volatile memory of the device.
+        Enumeration : 'UserSetDefault'
+Selects the feature User Set to load and make active by default when the device is restarted.
+        Enumeration : 'UserSetFeatureSelector'
+List of features that are saved to user sets.
+        Boolean     : 'UserSetFeatureEnable'
+Whether or not the selected feature is saved to user sets.
+    Category    : 'ChunkDataControl'
+        Boolean     : 'ChunkModeActive'
+Activates the inclusion of Chunk data in the payload of the image.
+        Enumeration : 'ChunkSelector'
+              * ChunkEnable
+Selects which chunk data to enable or disable.
+        Boolean     : 'ChunkEnable'
+Enables the inclusion of the selected Chunk data in the payload of the image.
+        Integer     : 'ChunkImage'
+Returns the image payload.
+        Integer     : 'ChunkCRC'
+Returns the CRC of the image payload.
+        Integer     : 'ChunkFrameID'
+Returns the image frame ID.
+        Integer     : 'ChunkOffsetX'
+Returns the Offset X of the image included in the payload.
+        Integer     : 'ChunkOffsetY'
+Returns the Offset Y of the image included in the payload.
+        Integer     : 'ChunkWidth'
+Returns the width of the image included in the payload.
+        Integer     : 'ChunkHeight'
+Returns the height of the image included in the payload.
+        Enumeration : 'ChunkPixelFormat'
+Format of the pixel provided by the camera
+        Float       : 'ChunkExposureTime'
+Returns the exposure time used to capture the image.
+        Enumeration : 'ChunkGainSelector'
+              * ChunkGain
+Selects which gain to retrieve
+        Float       : 'ChunkGain'
+Returns the gain used to capture the image.
+        Enumeration : 'ChunkBlackLevelSelector'
+              * ChunkBlackLevel
+Selects which black level to retrieve
+        Float       : 'ChunkBlackLevel'
+Returns the black level used to capture the image.
+        Integer     : 'ChunkTimestamp'
+Returns the Timestamp of the image.
+        Integer     : 'ChunkSequencerSetActive'
+Returns the index of the active set of the running sequencer included in the payload.
+        Integer     : 'ChunkExposureEndLineStatusAll'
+Returns the status of all the I/O lines at the end of exposure event.
+        Integer     : 'ChunkCompressionMode'
+        Integer     : 'ChunkCurrentDatarate'
+        Float       : 'ChunkCompressionRatio'
+        Integer     : 'ChunkSerialDataLength'
+Returns the length of the received serial data that was included in the payload.
+        StringReg   : 'ChunkSerialData'
+Returns the serial data that was received.
+        Boolean     : 'ChunkSerialReceiveOverflow'
+Returns the status of the chunk serial receive overflow.
+    Category    : 'LUTControl'
+        Enumeration : 'LUTSelector'
+              * LUTEnable
+              * LUTIndex
+              * LUTValue
+              * LUTValueAll
+Selects which LUT to control.
+        Boolean     : 'LUTEnable'
+Activates the selected LUT.
+        Integer     : 'LUTIndex'
+              * LUTValue
+Control the index (offset) of the coefficient to access in the selected LUT.
+        Integer     : 'LUTValue'
+Returns the Value at entry LUTIndex of the LUT selected by LUTSelector.
+        Register    : 'LUTValueAll'
+Accesses all the LUT coefficients in a single access without using individual LUTIndex.
+    Category    : 'EventControl'
+        Enumeration : 'EventSelector'
+              * EventNotification
+Selects which Event to enable or disable.
+        Enumeration : 'EventNotification'
+Enables/Disables the selected event.
+        Category    : 'EventExposureEndData'
+            Integer     : 'EventExposureEnd'
+Returns the unique identifier of the Exposure End type of Event.
+            Integer     : 'EventExposureEndTimestamp'
+Returns the Timestamp of the Exposure End Event.
+            Integer     : 'EventExposureEndFrameID'
+Returns the unique Identifier of the Frame (or image) that generated the Exposure End Event.
+        Category    : 'EventErrorData'
+            Integer     : 'EventError'
+Returns the unique identifier of the Error type of Event.
+            Integer     : 'EventErrorTimestamp'
+Returns the Timestamp of the Error Event.
+            Integer     : 'EventErrorFrameID'
+Returns the unique Identifier of the Frame (or image) that generated the Error Event.
+            Integer     : 'EventErrorCode'
+Returns the error code for the error that happened
+        Category    : 'EventSerialPortReceiveData'
+            Integer     : 'EventSerialPortReceive'
+Returns the unique identifier of the Serial Port Receive type of Event.
+            Integer     : 'EventSerialPortReceiveTimestamp'
+Returns the Timestamp of the Serial Port Receive Event.
+            StringReg   : 'EventSerialData'
+Returns the serial data that was received.
+            Integer     : 'EventSerialDataLength'
+Returns the length of the received serial data that was included in the event payload.
+            Boolean     : 'EventSerialReceiveOverflow'
+Returns the status of the event serial receive overflow.
+        Category    : 'EventTestData'
+            Integer     : 'EventTest'
+Returns the unique identifier of the Test type of Event.
+            Integer     : 'EventTestTimestamp'
+Returns the Timestamp of the Test Event.
+    Category    : 'CounterAndTimerControl'
+        Enumeration : 'CounterSelector'
+              * CounterEventSource
+              * CounterEventActivation
+              * CounterDuration
+              * CounterDelay
+              * CounterValue
+              * CounterTriggerSource
+              * CounterTriggerActivation
+              * CounterResetSource
+              * CounterResetActivation
+              * CounterValueAtReset
+              * CounterStatus
+Selects which counter to configure
+        Enumeration : 'CounterEventSource'
+Selects the event that will increment the counter
+Selects the activation mode of the event to increment the Counter.
+        Integer     : 'CounterDuration'
+Sets the duration (or number of events) before the CounterEnd event is generated.
+        Integer     : 'CounterValue'
+Current counter value
+Value of the selected Counter when it was reset by a trigger.
+        Enumeration : 'CounterTriggerSource'
+Selects the source of the trigger to start the counter
+        Enumeration : 'CounterTriggerActivation'
+Selects the activation mode of the trigger to start the Counter.
+Selects the signal that will be the source to reset the Counter.
+Selects the Activation mode of the Counter Reset Source signal.
+        Enumeration : 'CounterStatus'
+Returns the current status of the Counter.
+        Integer     : 'CounterDelay'
+Sets the delay (or number of events) before the CounterStart event is generated.
+    Category    : 'TestControl'
+        Command     : 'TestEventGenerate'
+This command generates a test event and sends it to the host.
+        Integer     : 'Test0001'
+For testing only.
+        Integer     : 'GuiXmlManifestAddress'
+Location of the GUI XML manifest table.
+        Command     : 'TriggerEventTest'
+This command generates a test event and sends it to the host.
+    Category    : 'LogicBlockControl'
+        Enumeration : 'LogicBlockSelector'
+              * LogicBlockLUTSelector
+Selects which LogicBlock to configure
+        Enumeration : 'LogicBlockLUTSelector'
+              * LogicBlockLUTOutputValueAll
+              * LogicBlockLUTInputSelector
+              * LogicBlockLUTRowIndex
+Selects which LogicBlock LUT to configure
+        Enumeration : 'LogicBlockLUTInputSelector'
+              * LogicBlockLUTInputSource
+              * LogicBlockLUTInputActivation
+Controls which LogicBlockLUT Input Source & Activation to access.
+        Enumeration : 'LogicBlockLUTInputSource'
+Selects the source for the input into the Logic LUT.
+        Enumeration : 'LogicBlockLUTInputActivation'
+Selects the activation mode of the Logic Input Source signal.
+        Integer     : 'LogicBlockLUTOutputValueAll'
+Sets the value of all the output bits in the selected LUT.
+        Integer     : 'LogicBlockLUTRowIndex'
+              * LogicBlockLUTOutputValue
+Controls the row of the truth table to access in the selected LUT.
+        Boolean     : 'LogicBlockLUTOutputValue'
+Controls the output column of the truth table for the selected LogicBlockLUTRowIndex.
+    Category    : 'DigitalIOControl'
+        Enumeration : 'LineSelector'
+              * LineMode
+              * V3_3Enable
+              * LineInverter
+              * LineStatus
+              * LineInputFilterSelector
+              * LineSource
+              * LineFormat
+Selects the physical line (or pin) of the external device connector to configure
+        Enumeration : 'LineMode'
+Controls if the physical Line is used to Input or Output a signal.
+Internally generated 3.3V rail. Enable to supply external circuits with power. This is different than standard logic outputs in that it is comparatively slow to switch but can supply a more significant amount of power. This is only available on some pins.
+        Boolean     : 'LineInverter'
+Controls the inversion of the signal of the selected input or output line.
+        Boolean     : 'LineStatus'
+Returns the current status of the selected input or output Line
+        Integer     : 'LineStatusAll'
+Returns the current status of all the line status bits in a hexadecimal representation (Line 0 status corresponds to bit 0, Line 1 status with bit 1, etc). This allows simultaneous reading of all line statuses at once.
+        Enumeration : 'LineInputFilterSelector'
+              * LineFilterWidth
+Selects the kind of input filter to configure: Deglitch or Debounce.
+        Float       : 'LineFilterWidth'
+Filter width in microseconds for the selected line and filter combination
+        Enumeration : 'LineSource'
+Selects which internal acquisition or I/O source signal to output on the selected line. LineMode must be Output.
+        Enumeration : 'LineFormat'
+Displays the current electrical format of the selected physical input or output Line.
+        Enumeration : 'UserOutputSelector'
+              * UserOutputValue
+Selects which bit of the User Output register is set by UserOutputValue.
+        Boolean     : 'UserOutputValue'
+Value of the selected user output, either logic high (enabled) or logic low (disabled).
+        Integer     : 'UserOutputValueAll'
+Returns the current status of all the user output status bits in a hexadecimal representation (UserOutput 0 status corresponds to bit 0, UserOutput 1 status with bit 1, etc). This allows simultaneous reading of all user output statuses at once.
+    Category    : 'SerialPortControl'
+        Enumeration : 'SerialPortSelector'
+              * SerialPortSource
+              * SerialPortBaudRate
+              * SerialPortDataBits
+              * SerialPortStopBits
+              * SerialPortParity
+              * SerialTransmitQueueMaxCharacterCount
+              * SerialTransmitQueueCurrentCharacterCount
+              * SerialReceiveQueueMaxCharacterCount
+              * SerialReceiveQueueCurrentCharacterCount
+              * SerialReceiveQueueClear
+              * SerialReceiveFramingErrorCount
+              * SerialReceiveParityErrorCount
+Selects which serial port of the device to control.
+        Enumeration : 'SerialPortSource'
+Specifies the physical input Line on which to receive serial data.
+        Enumeration : 'SerialPortBaudRate'
+This feature controls the baud rate used by the selected serial port.
+        Integer     : 'SerialPortDataBits'
+This feature controls the number of data bits used by the selected serial port.  Possible values that can be used are between 5 and 9.
+        Enumeration : 'SerialPortStopBits'
+This feature controls the number of stop bits used by the selected serial port.
+        Enumeration : 'SerialPortParity'
+This feature controls the parity used by the selected serial port.
+        Integer     : 'SerialTransmitQueueMaxCharacterCount'
+>Returns the maximum number of characters in the serial port transmit queue.
+        Integer     : 'SerialTransmitQueueCurrentCharacterCount'
+Returns the number of characters currently in the serial port transmit queue.
+        Integer     : 'SerialReceiveQueueMaxCharacterCount'
+>Returns the maximum number of characters in the serial port receive queue.
+        Integer     : 'SerialReceiveQueueCurrentCharacterCount'
+Returns the number of characters currently in the serial port receive queue.
+        Command     : 'SerialReceiveQueueClear'
+This is a command that clears the device serial port receive queue.
+        Integer     : 'SerialReceiveFramingErrorCount'
+Returns the number of framing errors that have occurred on the serial port.
+        Integer     : 'SerialReceiveParityErrorCount'
+Returns the number of parity errors that have occurred on the serial port.
+    Category    : 'FileAccessControl'
+        Enumeration : 'FileSelector'
+              * FileOperationSelector_Val
+              * FileOpenMode_Val
+              * FileSize_Val
+Selects which file is being operated on. This must be set before performing any file operations.
+        Enumeration : 'FileOperationSelector'
+              * FileOperationExecute_Val
+              * FileAccessOffset_Val
+              * FileAccessLength_Val
+              * FileOperationStatus_Val
+              * FileOperationResult_Val
+Sets operation to execute on the selected file when the execute command is given.
+        Command     : 'FileOperationExecute'
+This is a command that executes the selected file operation on the selected file.
+        Enumeration : 'FileOpenMode'
+The mode of the file when it is opened. The file can be opened for reading, writting or both. This must be set before opening the file.
+        Register    : 'FileAccessBuffer'
+Defines the intermediate access buffer that allows the exchange of data between the device file storage and the application.
+        Integer     : 'FileAccessOffset'
+Controls the Offset of the mapping between the device file storage and the FileAccessBuffer.
+        Integer     : 'FileAccessLength'
+Controls the Length of the mapping between the device file storage and the FileAccessBuffer.
+        Enumeration : 'FileOperationStatus'
+Represents the file operation execution status.
+        Integer     : 'FileOperationResult'
+Represents the file operation result. For Read or Write operations, the number of successfully read/written bytes is returned.
+        Integer     : 'FileSize'
+Represents the size of the selected file in bytes.
+    Category    : 'ActionControl'
+        Enumeration : 'ActionUnconditionalMode'
+Enables the unconditional action command mode where action commands are processed even when the primary control channel is closed.
+        Integer     : 'ActionSignalSize'
+Indicates the number of seperate action commands supported by this device.
+        Command     : 'ActionQueueEmpty'
+Removes all action commands in the queue.
+        Integer     : 'ActionDeviceKey'
+Provides the device key that allows the device to check the validity of action commands. The device internal assertion of an action signal is only authorized if the ActionDeviceKey and the action device key value in the protocol message are equal.
+        Integer     : 'ActionQueueSize'
+Indicates the size of the scheduled action commands queue. This number represents the maximum number of scheduled action commands that can be pending at a given point in time.
+        Enumeration : 'ActionSelector'
+              * ActionGroupMask
+              * ActionGroupKey
+Selects to which Action Signal further Action settings apply.
+        Integer     : 'ActionGroupMask'
+Provides the mask that the device will use to validate the action on reception of the action protocol message.
+        Integer     : 'ActionGroupKey'
+Provides the key that the device will use to validate the action on reception of the action protocol message.
+    Category    : 'TransferControl'
+        Enumeration : 'TransferControlMode'
+Selects the control method for the transfers. Basic and Automatic start transmitting data as soon as there is enough data to fill a link layer packet. User Controlled allows you to directly control the transfer of blocks.
+Selects the operation mode of the transfer. Continuous is similar to Basic/Automatic but you can start/stop the transfer while acquisition runs independently. Multi Block transmits a specified number of blocks and then stops.
+Specifies the number of data blocks (images) that the device should stream before stopping. This feature is only active if the Transfer Operation Mode is set to Multi Block.
+        Integer     : 'TransferQueueMaxBlockCount'
+Returns the maximum number of data blocks (images) in the transfer queue
+        Integer     : 'TransferQueueCurrentBlockCount'
+Returns number of data blocks (images) currently in the transfer queue.
+        Integer     : 'TransferQueueOverflowCount'
+Returns number of images that have been lost before being transmitted because the transmit queue hasn't been cleared fast enough.
+Specifies the operation mode of the transfer queue.
+Starts the streaming of data blocks (images) out of the device. This feature is available when the Transfer Control Mode is set to User Controlled.
+Stops the streaming of data block (images). The current block transmission is completed. This feature is available when the Transfer Control Mode is set to User Controlled.
