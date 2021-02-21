@@ -1,5 +1,5 @@
 # LVM_FLIR_Software
- Python scripts for working with the LVM Acquisition and Guide (AG) camerase from FLIR.
+ Python scripts for working with the LVM Acquisition and Guide (AG) cameras from FLIR.
 
 **FLIR_Utils.py** Python utilities to work with the FLIR camera. These include:
 
@@ -29,4 +29,4 @@
 
 **description.txt**
 
-**features.txt**
+**features.txt** List of all "enumerations" produced by print(cam.dup_available_enumerations_as_display_names())
