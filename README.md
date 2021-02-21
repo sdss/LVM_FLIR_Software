@@ -27,6 +27,6 @@
 
 **WriteTestScript_MV.py** Same as WriteTestScript.py, but specifically for mean-variance testing
 
-**description.txt** List of all commands, etc., including some description
+**description.txt** List of all commands, etc., including some description. Produced by arv-tool-0.8 description
 
-**features.txt** List of all "enumerations"
+**features.txt** List of all "features". Produced by arv-tool-0.8 features. Note that arv-tool-0.8 values lists the current values.
