@@ -1,5 +1,5 @@
 # LVM_FLIR_Software
- Python scripts for working with the LVM Acquisition and Guide (AG) cameras from FLIR.
+ Python scripts for working with the LVM Acquisition and Guide (AG) cameras from FLIR. These routines use packages from the [Aravis Project](https://github.com/AravisProject)
 
 **FLIR_Utils.py** Python utilities to work with the FLIR camera. These include:
 
@@ -27,6 +27,6 @@
 
 **WriteTestScript_MV.py** Same as WriteTestScript.py, but specifically for mean-variance testing
 
-**description.txt**
+**description.txt** List of all commands, etc., including some description
 
-**features.txt** List of all "enumerations" produced by print(cam.dup_available_enumerations_as_display_names())
+**features.txt** List of all "enumerations"
